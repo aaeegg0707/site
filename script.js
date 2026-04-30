@@ -72,7 +72,7 @@ let lastScrollTop = 0;
 const navbar = document.querySelector('nav.navbar');
 
 window.addEventListener('scroll', () => {
-    let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    let scrollTop = window.scrollY || document.documentElement.scrollTop;
     
     // Adicionar sombra quando scrollar
     if (scrollTop > 0) {
@@ -134,7 +134,7 @@ function scrollToTop() {
 window.addEventListener('scroll', () => {
     const scrollBtn = document.querySelector('.scroll-to-top');
     
-    if (window.pageYOffset > 300) {
+    if (window.scrollY > 300) {
         if (!document.querySelector('.scroll-to-top')) {
             const btn = document.createElement('button');
             btn.className = 'scroll-to-top';
@@ -188,14 +188,14 @@ window.addEventListener('scroll', () => {
         const sectionTop = section.offsetTop;
         const sectionHeight = section.clientHeight;
         
-        if (pageYOffset >= sectionTop - 200) {
+        if (window.scrollY >= sectionTop - 200) {
             current = section.getAttribute('id');
         }
     });
     
     navLinksNav.forEach(link => {
         link.classList.remove('active');
-        if (link.getAttribute('href').includes(current)) {
+        if (current && link.getAttribute('href') === `#${current}`) {
             link.classList.add('active');
         }
     });
@@ -204,9 +204,66 @@ window.addEventListener('scroll', () => {
 // Adicionar CSS para link ativo
 const style = document.createElement('style');
 style.textContent = `
+    /* Navbar Escura */
+    .navbar {
+        position: sticky;
+        top: 0;
+        width: 100%;
+        background: #0f172a !important; /* Cor mais escura */
+        z-index: 9999;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+        display: block !important;
+    }
+    .nav-text { color: white !important; }
+
     .nav-link.active {
-        background-color: #667eea;
-        color: white;
+        color: #ed1c24 !important;
+        font-weight: bold;
+    }
+
+    /* Correção para o Menu Mobile que não aparecia */
+    @media (max-width: 768px) {
+        .nav-menu {
+            display: none;
+            flex-direction: column;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            background: #0f172a;
+            padding: 20px;
+            box-shadow: 0 10px 15px rgba(0,0,0,0.1);
+            list-style: none;
+        }
+
+        .nav-menu.active {
+            display: flex !important;
+        }
+
+        .hamburger {
+            display: flex !important;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+        }
+
+        .hamburger span {
+            display: block;
+            width: 25px;
+            height: 3px;
+            background: white;
+            transition: 0.3s;
+        }
+        
+        .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+        .hamburger.active span:nth-child(2) { opacity: 0; }
+        .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(6px, -6px); }
+    }
+
+    .nav-flag {
+        width: 35px;
+        height: auto;
+        margin-right: 10px;
     }
 `;
 document.head.appendChild(style);
@@ -223,13 +280,11 @@ function lazyLoadImages() {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     const img = entry.target;
-                    img.style.opacity = '0';
-                    img.style.transition = 'opacity 0.5s ease';
-                    
-                    img.onload = () => {
-                        img.style.opacity = '1';
-                    };
-                    
+                    // Garante visibilidade
+                    img.style.opacity = '1';
+                    if (img.dataset.src) {
+                        img.src = img.dataset.src;
+                    }
                     observer.unobserve(img);
                 }
             });

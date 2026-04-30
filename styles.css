@@ -115,7 +115,7 @@ header.hero {
 .flag-svg {
     width: 250px;
     height: auto;
-    margin-bottom: 40px;
+    margin-top: 60px; /* Espaço para a navbar fixa */
     filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.3));
     animation: bounce 3s ease-in-out infinite;
 }
@@ -200,12 +200,12 @@ header.hero {
    ============================================ */
 
 nav.navbar {
-    background: var(--color-secondary);
+    background: #0f172a; /* Azul marinho muito escuro */
     padding: 0;
     position: sticky;
     top: 0;
     z-index: 1000;
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
     height: 60px;
     display: flex;
     align-items: center;
