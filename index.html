@@ -23,14 +23,28 @@
                 <span class="nav-text">RPDC</span>
             </div>
             <ul class="nav-menu">
-                <li><a href="#visao-geral" class="nav-link"><i class="fas fa-globe"></i> Visão Geral</a></li>
-                <li><a href="#historia" class="nav-link"><i class="fas fa-history"></i> História</a></li>
-                <li><a href="#geografia" class="nav-link"><i class="fas fa-map"></i> Geografia</a></li>
-                <li><a href="#cultura" class="nav-link"><i class="fas fa-mask"></i> Cultura</a></li>
-                <li><a href="#lideranca" class="nav-link"><i class="fas fa-crown"></i> Liderança</a></li>
-                <li><a href="#galeria" class="nav-link"><i class="fas fa-images"></i> Galeria</a></li>
-                <li><a href="#informacoes" class="nav-link"><i class="fas fa-info-circle"></i> Info</a></li>
+                <li><a href="#visao-geral" class="nav-link" data-i18n="nav_overview"><i class="fas fa-globe"></i> Visão Geral</a></li>
+                <li><a href="#historia" class="nav-link" data-i18n="nav_history"><i class="fas fa-history"></i> História</a></li>
+                <li><a href="#geografia" class="nav-link" data-i18n="nav_geography"><i class="fas fa-map"></i> Geografia</a></li>
+                <li><a href="#cultura" class="nav-link" data-i18n="nav_culture"><i class="fas fa-mask"></i> Cultura</a></li>
+                <li><a href="#lideranca" class="nav-link" data-i18n="nav_leadership"><i class="fas fa-crown"></i> Liderança</a></li>
+                <li><a href="#galeria" class="nav-link" data-i18n="nav_gallery"><i class="fas fa-images"></i> Galeria</a></li>
+                <li><a href="#informacoes" class="nav-link" data-i18n="nav_info"><i class="fas fa-info-circle"></i> Info</a></li>
             </ul>
+            <div class="lang-selector">
+                <i class="fas fa-language"></i>
+                <select id="language-select">
+                    <option value="pt">PT-BR</option>
+                    <option value="pt-pt">PT-PT</option>
+                    <option value="en">EN</option>
+                    <option value="es">ES</option>
+                    <option value="fr">FR</option>
+                    <option value="ko">KO</option>
+                    <option value="ja">JA</option>
+                    <option value="zh">ZH</option>
+                    <option value="ru">RU</option>
+                </select>
+            </div>
             <div class="hamburger">
                 <span></span>
                 <span></span>
@@ -60,14 +74,14 @@
                     <polygon points="12,8 12.9,10.8 15.8,10.8 13.4,12.7 14.4,15.3 12,13.8 9.6,15.3 10.6,12.7 8.2,10.8 11.1,10.8" fill="#ed1c24"/>
                 </svg>
 
-                <h1 class="hero-title">COREIA DO NORTE</h1>
-                <p class="hero-subtitle">Uma Jornada pela História, Cultura e Tradições</p>
+                <h1 class="hero-title" data-i18n="hero_title">COREIA DO NORTE</h1>
+                <p class="hero-subtitle" data-i18n="hero_subtitle">Uma Jornada pela História, Cultura e Tradições</p>
                 
                 <div class="hero-buttons">
-                    <a href="#visao-geral" class="btn btn-primary">
+                    <a href="#visao-geral" class="btn btn-primary" data-i18n="btn_explore">
                         <i class="fas fa-play"></i> Explorar
                     </a>
-                    <a href="#galeria" class="btn btn-secondary">
+                    <a href="#galeria" class="btn btn-secondary" data-i18n="btn_gallery">
                         <i class="fas fa-images"></i> Galeria
                     </a>
                 </div>
@@ -81,19 +95,19 @@
         <section id="visao-geral" class="section">
             <div class="container">
                 <div class="section-header">
-                    <h2>📊 Visão Geral</h2>
+                    <h2 data-i18n="header_overview">📊 Visão Geral</h2>
                     <div class="header-underline"></div>
                 </div>
 
                 <div class="grid-2">
                     <!-- Card com Imagem Real -->
                     <div class="card card-image">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/North_Korea_Landscape.jpg/800px-North_Korea_Landscape.jpg" 
-                             alt="Landscape da Coreia do Norte" 
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/Mansu_Hill_Grand_Monument_2014.jpg/800px-Mansu_Hill_Grand_Monument_2014.jpg" 
+                             alt="Grande Monumento Mansudae - Estátuas dos Líderes" 
                              class="card-img"
                              loading="lazy">
                         <div class="card-overlay">
-                            <p>Paisagens naturais da Coreia do Norte</p>
+                            <p>Grande Monumento Mansudae - Kim Il-sung e Kim Jong-il</p>
                         </div>
                     </div>
 
@@ -504,8 +518,8 @@
                         </div>
                     </div>
 
-                    <img src="https://images.unsplash.com/photo-1553621042-f6e147245754?w=600&h=400&fit=crop" 
-                         alt="Culinária Coreana" 
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/Pyongyang_Arc_de_Triomphe.jpg/800px-Pyongyang_Arc_de_Triomphe.jpg" 
+                         alt="Arco do Triunfo de Pyongyang" 
                          class="card-img rounded">
                 </div>
 
@@ -575,7 +589,7 @@
 
                 <div class="gallery-grid">
                     <div class="gallery-item">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/North_Korea%2C_Pyongyang%2C_Juche_Tower.jpg/800px-North_Korea%2C_Pyongyang%2C_Juche_Tower.jpg" 
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Juche_Tower_Pyongyang.jpg/800px-Juche_Tower_Pyongyang.jpg" 
                              alt="Torre Juche em Pyongyang" loading="lazy">
                         <div class="gallery-overlay">
                             <p>Torre Juche - Pyongyang</p>
@@ -583,10 +597,10 @@
                     </div>
 
                     <div class="gallery-item">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d2/Pyongyang_Paektusan.jpg/800px-Pyongyang_Paektusan.jpg" 
-                             alt="Edifício Paektusan" loading="lazy">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Ryugyong_Hotel_March_2014.jpg/800px-Ryugyong_Hotel_March_2014.jpg" 
+                             alt="Hotel Ryugyong" loading="lazy">
                         <div class="gallery-overlay">
-                            <p>Hotel Paektusan</p>
+                            <p>Hotel Ryugyong</p>
                         </div>
                     </div>
 
@@ -599,10 +613,10 @@
                     </div>
 
                     <div class="gallery-item">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Mass_Games_2.jpg/800px-Mass_Games_2.jpg" 
-                             alt="Jogos em Massa" loading="lazy">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cc/Monument_to_Party_Founding_Pyongyang.jpg/800px-Monument_to_Party_Founding_Pyongyang.jpg" 
+                             alt="Monumento à Fundação do Partido" loading="lazy">
                         <div class="gallery-overlay">
-                            <p>Jogos em Massa</p>
+                            <p>Monumento à Fundação do Partido</p>
                         </div>
                     </div>
 
@@ -615,10 +629,10 @@
                     </div>
 
                     <div class="gallery-item">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/39/Pyongyang_night.jpg/800px-Pyongyang_night.jpg" 
-                             alt="Pyongyang Noturna" loading="lazy">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Arch_of_Reunification_Pyongyang.jpg/800px-Arch_of_Reunification_Pyongyang.jpg" 
+                             alt="Arco da Reunificação" loading="lazy">
                         <div class="gallery-overlay">
-                            <p>Pyongyang à Noite</p>
+                            <p>Arco da Reunificação</p>
                         </div>
                     </div>
                 </div>

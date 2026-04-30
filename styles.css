@@ -8,9 +8,11 @@
 }
 
 :root {
-    --color-primary: #C60C30;
-    --color-secondary: #1a1a2e;
-    --color-accent: #16213e;
+    --color-primary: #ed1c24; /* Vermelho oficial RPDC */
+    --color-secondary: #024fa2; /* Azul oficial RPDC */
+    --color-gold: #d4af37; /* Dourado para honrarias */
+    --color-dark: #0a0f1d;
+    --color-accent: #1e3a8a;
     --color-light: #f8f9fa;
     --color-white: #ffffff;
     --color-text: #333333;
@@ -29,6 +31,9 @@ body {
     line-height: 1.6;
     color: var(--color-text);
     background-color: var(--color-light);
+    /* Padrão sutil de fundo para parecer papel oficial */
+    background-image: radial-gradient(#e5e7eb 0.5px, transparent 0.5px);
+    background-size: 20px 20px;
     overflow-x: hidden;
 }
 
@@ -53,7 +58,8 @@ body {
 header.hero {
     position: relative;
     height: 600px;
-    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+    /* Gradiente com as cores da bandeira */
+    background: linear-gradient(135deg, var(--color-dark) 0%, var(--color-secondary) 50%, var(--color-primary) 100%);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -68,7 +74,7 @@ header.hero {
     left: 0;
     right: 0;
     bottom: 0;
-    background: radial-gradient(ellipse at top, rgba(198, 12, 48, 0.1), transparent 70%);
+    background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.6) 100%);
     z-index: 1;
 }
 
@@ -138,7 +144,7 @@ header.hero {
 }
 
 .hero-subtitle {
-    font-size: 1.3rem;
+    font-size: 1.5rem;
     opacity: 0.95;
     margin-bottom: 40px;
     font-weight: 300;
@@ -206,6 +212,7 @@ nav.navbar {
     top: 0;
     z-index: 1000;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+    border-bottom: 3px solid var(--color-primary);
     height: 60px;
     display: flex;
     align-items: center;
@@ -335,7 +342,7 @@ main {
 
 .section h2 {
     font-size: 2.8rem;
-    color: var(--color-secondary);
+    color: var(--color-dark);
     margin-bottom: 20px;
     text-align: center;
     font-weight: 800;
@@ -346,7 +353,7 @@ main {
 .header-underline {
     width: 100px;
     height: 4px;
-    background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
+    background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
     border-radius: 2px;
     animation: slideIn 0.6s ease;
 }
@@ -396,7 +403,8 @@ main {
     border-radius: 12px;
     box-shadow: var(--shadow-sm);
     transition: var(--transition);
-    border-top: 4px solid var(--color-primary);
+    border: 1px solid #ddd;
+    border-left: 8px solid var(--color-primary);
 }
 
 .card:hover {
@@ -456,7 +464,7 @@ main {
 
 .fact-content strong {
     display: block;
-    color: var(--color-primary);
+    color: var(--color-secondary);
     margin-bottom: 5px;
     font-size: 0.95rem;
     text-transform: uppercase;
@@ -2455,6 +2463,14 @@ footer.footer {
     }
 }
 
+/* Garantia de visibilidade para imagens */
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    background-color: #e2e8f0; /* Cor de fundo enquanto carrega */
+}
+
 /* ============================================
    LEADER CARDS
    ============================================ */
@@ -2626,4 +2642,31 @@ footer.footer {
 .gallery-svg {
     width: 100%;
     height: 100%;
+}
+
+/* ============================================
+   LANGUAGE SELECTOR
+   ============================================ */
+.lang-selector {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-left: 20px;
+    color: white;
+}
+
+.lang-selector select {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 4px;
+    padding: 2px 5px;
+    cursor: pointer;
+    font-weight: 600;
+    outline: none;
+}
+
+.lang-selector select option {
+    background: #024fa2;
+    color: white;
 }

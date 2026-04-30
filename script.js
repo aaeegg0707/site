@@ -59,8 +59,8 @@ const observer = new IntersectionObserver((entries) => {
 }, observerOptions);
 
 // Observar todos os cards e seções
+// Removi a configuração de opacidade zero via JS para garantir que o conteúdo apareça sempre
 document.querySelectorAll('.card, .info-card, .region-card, .festival-card, .tradition-card, .gallery-item').forEach(element => {
-    element.style.opacity = '0';
     observer.observe(element);
 });
 
@@ -145,7 +145,7 @@ window.addEventListener('scroll', () => {
                 right: 30px;
                 width: 50px;
                 height: 50px;
-                background: linear-gradient(135deg, #667eea, #764ba2);
+                background: #ed1c24;
                 color: white;
                 border: none;
                 border-radius: 50%;
@@ -209,7 +209,7 @@ style.textContent = `
         position: sticky;
         top: 0;
         width: 100%;
-        background: #0f172a !important; /* Cor mais escura */
+        background: #024fa2 !important; /* Azul escuro oficial */
         z-index: 9999;
         box-shadow: 0 4px 20px rgba(0,0,0,0.4);
         display: block !important;
@@ -217,7 +217,7 @@ style.textContent = `
     .nav-text { color: white !important; }
 
     .nav-link.active {
-        color: #ed1c24 !important;
+        color: #ffd700 !important; /* Dourado para link ativo */
         font-weight: bold;
     }
 
@@ -230,7 +230,7 @@ style.textContent = `
             top: 100%;
             left: 0;
             width: 100%;
-            background: #0f172a;
+            background: #024fa2;
             padding: 20px;
             box-shadow: 0 10px 15px rgba(0,0,0,0.1);
             list-style: none;
@@ -268,33 +268,9 @@ style.textContent = `
 `;
 document.head.appendChild(style);
 
-// ============================================
-// CARREGAMENTO PROGRESSIVO DE IMAGENS
-// ============================================
-
-function lazyLoadImages() {
-    const images = document.querySelectorAll('img');
-    
-    if ('IntersectionObserver' in window) {
-        const imageObserver = new IntersectionObserver((entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const img = entry.target;
-                    // Garante visibilidade
-                    img.style.opacity = '1';
-                    if (img.dataset.src) {
-                        img.src = img.dataset.src;
-                    }
-                    observer.unobserve(img);
-                }
-            });
-        });
-        
-        images.forEach(img => imageObserver.observe(img));
-    }
-}
-
-lazyLoadImages();
+// Removi a função lazyLoadImages() pois o navegador já faz isso 
+// nativamente com o atributo loading="lazy" no seu HTML.
+// Isso resolve o problema das imagens "sumidas".
 
 // ============================================
 // NOTIFICAÇÃO DE CARREGAMENTO
@@ -388,10 +364,11 @@ if (localStorage.getItem('darkMode') === 'true') {
 // Precarregar as principais imagens
 function preloadImages() {
     const images = [
-        'https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1?w=600&h=400&fit=crop',
-        'https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=600&h=400&fit=crop',
-        'https://images.unsplash.com/photo-1578470078519-71a47495d5d0?w=600&h=400&fit=crop',
-        'https://images.unsplash.com/photo-1553621042-f6e147245754?w=600&h=400&fit=crop',
+        'https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/Mansu_Hill_Grand_Monument_2014.jpg/800px-Mansu_Hill_Grand_Monument_2014.jpg',
+        'https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/Pyongyang_Arc_de_Triomphe.jpg/800px-Pyongyang_Arc_de_Triomphe.jpg',
+        'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Juche_Tower_Pyongyang.jpg/800px-Juche_Tower_Pyongyang.jpg',
+        'https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Ryugyong_Hotel_March_2014.jpg/800px-Ryugyong_Hotel_March_2014.jpg',
+        'https://upload.wikimedia.org/wikipedia/commons/thumb/c/cc/Monument_to_Party_Founding_Pyongyang.jpg/800px-Monument_to_Party_Founding_Pyongyang.jpg'
     ];
     
     images.forEach(src => {
@@ -401,6 +378,169 @@ function preloadImages() {
 }
 
 preloadImages();
+
+// ============================================
+// SISTEMA DE TRADUÇÃO (i18n)
+// ============================================
+
+const translations = {
+    pt: {
+        nav_overview: "Visão Geral",
+        nav_history: "História",
+        nav_geography: "Geografia",
+        nav_culture: "Cultura",
+        nav_leadership: "Liderança",
+        nav_gallery: "Galeria",
+        nav_info: "Info",
+        hero_title: "COREIA DO NORTE",
+        hero_subtitle: "Uma Jornada pela História, Cultura e Tradições",
+        btn_explore: "Explorar",
+        btn_gallery: "Galeria",
+        header_overview: "📊 Visão Geral"
+    },
+    en: {
+        nav_overview: "Overview",
+        nav_history: "History",
+        nav_geography: "Geography",
+        nav_culture: "Culture",
+        nav_leadership: "Leadership",
+        nav_gallery: "Gallery",
+        nav_info: "Info",
+        hero_title: "NORTH KOREA",
+        hero_subtitle: "A Journey Through History, Culture, and Traditions",
+        btn_explore: "Explore",
+        btn_gallery: "Gallery",
+        header_overview: "📊 Overview"
+    },
+    es: {
+        nav_overview: "Visión General",
+        nav_history: "Historia",
+        nav_geography: "Geografía",
+        nav_culture: "Cultura",
+        nav_leadership: "Liderazgo",
+        nav_gallery: "Galería",
+        nav_info: "Info",
+        hero_title: "COREA DEL NORTE",
+        hero_subtitle: "Un viaje por la historia, la cultura y las tradiciones",
+        btn_explore: "Explorar",
+        btn_gallery: "Galería",
+        header_overview: "📊 Visión General"
+    },
+    fr: {
+        nav_overview: "Aperçu",
+        nav_history: "Histoire",
+        nav_geography: "Géographie",
+        nav_culture: "Culture",
+        nav_leadership: "Direction",
+        nav_gallery: "Galerie",
+        nav_info: "Info",
+        hero_title: "CORÉE DU NORD",
+        hero_subtitle: "Un voyage à travers l'histoire, la culture et les traditions",
+        btn_explore: "Explorer",
+        btn_gallery: "Galerie",
+        header_overview: "📊 Aperçu"
+    },
+    "pt-pt": {
+        nav_overview: "Visão Geral",
+        nav_history: "História",
+        nav_geography: "Geografia",
+        nav_culture: "Cultura",
+        nav_leadership: "Liderança",
+        nav_gallery: "Galeria",
+        nav_info: "Info",
+        hero_title: "COREIA DO NORTE",
+        hero_subtitle: "Uma Jornada pela História, Cultura e Tradições",
+        btn_explore: "Explorar",
+        btn_gallery: "Galeria",
+        header_overview: "📊 Visão Geral"
+    },
+    ko: {
+        nav_overview: "개요",
+        nav_history: "역사",
+        nav_geography: "지리",
+        nav_culture: "문화",
+        nav_leadership: "지도부",
+        nav_gallery: "갤러리",
+        nav_info: "정보",
+        hero_title: "조선민주주의인민공화국",
+        hero_subtitle: "역사, 문화, 전통을 통해 보는 여정",
+        btn_explore: "탐험하기",
+        btn_gallery: "갤러리",
+        header_overview: "📊 개요"
+    },
+    ja: {
+        nav_overview: "概要",
+        nav_history: "歴史",
+        nav_geography: "地理",
+        nav_culture: "文化",
+        nav_leadership: "指導部",
+        nav_gallery: "ギャラリー",
+        nav_info: "情報",
+        hero_title: "北朝鮮",
+        hero_subtitle: "歴史、文化、伝統を巡る旅",
+        btn_explore: "探索する",
+        btn_gallery: "ギャラリー",
+        header_overview: "📊 概要"
+    },
+    zh: {
+        nav_overview: "概览",
+        nav_history: "历史",
+        nav_geography: "地理",
+        nav_culture: "文化",
+        nav_leadership: "领导层",
+        nav_gallery: "画廊",
+        nav_info: "信息",
+        hero_title: "朝鲜",
+        hero_subtitle: "穿越历史、文化和传统的旅程",
+        btn_explore: "探索",
+        btn_gallery: "画廊",
+        header_overview: "📊 概览"
+    },
+    ru: {
+        nav_overview: "Обзор",
+        nav_history: "История",
+        nav_geography: "География",
+        nav_culture: "Культура",
+        nav_leadership: "Руководство",
+        nav_gallery: "Галерея",
+        nav_info: "Инфо",
+        hero_title: "СЕВЕРНАЯ КОРЕЯ",
+        hero_subtitle: "Путешествие через историю, культуру и традиции",
+        btn_explore: "Исследовать",
+        btn_gallery: "Галерея",
+        header_overview: "📊 Обзор"
+    }
+};
+
+function updateLanguage(lang) {
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        const translation = translations[lang][key];
+        
+        if (translation) {
+            const icon = el.querySelector('i');
+            if (icon) {
+                // Preserva o ícone e atualiza o texto
+                el.innerHTML = `${icon.outerHTML} ${translation}`;
+            } else {
+                el.textContent = translation;
+            }
+        }
+    });
+    localStorage.setItem('preferredLang', lang);
+}
+
+const langSelect = document.getElementById('language-select');
+if (langSelect) {
+    // Carregar preferência salva
+    const savedLang = localStorage.getItem('preferredLang') || 'pt';
+    langSelect.value = savedLang;
+    updateLanguage(savedLang);
+
+    langSelect.addEventListener('change', (e) => {
+        updateLanguage(e.target.value);
+    });
+}
 
 // ============================================
 // EVENT LISTENERS PARA ELEMENTOS INTERATIVOS
