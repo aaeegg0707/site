@@ -396,7 +396,17 @@ const translations = {
         hero_subtitle: "Uma Jornada pela História, Cultura e Tradições",
         btn_explore: "Explorar",
         btn_gallery: "Galeria",
-        header_overview: "📊 Visão Geral"
+        header_overview: "📊 Visão Geral",
+        facts_title: "Fatos Essenciais",
+        history_title: "📜 História",
+        history_intro: "A Coreia do Norte tem uma história rica e complexa que moldou a nação moderna.",
+        hist_period_1_title: "Período Colonial Japonês",
+        hist_period_1_desc: "A Península Coreana foi colonizada pelo Japão, resultando em profundas mudanças.",
+        geography_title: "🗺️ Geografia",
+        geo_loc_title: "Localização e Características",
+        geo_pos_label: "Posição Estratégica:",
+        footer_about_title: "Sobre Este Guia",
+        footer_about_desc: "Um guia educacional completo sobre a Coreia do Norte."
     },
     en: {
         nav_overview: "Overview",
@@ -410,7 +420,17 @@ const translations = {
         hero_subtitle: "A Journey Through History, Culture, and Traditions",
         btn_explore: "Explore",
         btn_gallery: "Gallery",
-        header_overview: "📊 Overview"
+        header_overview: "📊 Overview",
+        facts_title: "Essential Facts",
+        history_title: "📜 History",
+        history_intro: "North Korea has a rich and complex history that shaped the modern nation.",
+        hist_period_1_title: "Japanese Colonial Period",
+        hist_period_1_desc: "The Korean Peninsula was colonized by Japan, resulting in profound changes.",
+        geography_title: "🗺️ Geography",
+        geo_loc_title: "Location and Characteristics",
+        geo_pos_label: "Strategic Position:",
+        footer_about_title: "About This Guide",
+        footer_about_desc: "A complete educational guide about North Korea."
     },
     es: {
         nav_overview: "Visión General",
