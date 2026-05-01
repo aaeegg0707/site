@@ -10,6 +10,22 @@ const navLinks = document.querySelectorAll('.nav-link');
 hamburger.addEventListener('click', () => {
     hamburger.classList.toggle('active');
     navMenu.classList.toggle('active');
+    
+    // Bloquear scroll do body quando menu estiver aberto
+    if (navMenu.classList.contains('active')) {
+        document.body.style.overflow = 'hidden';
+        // Criar overlay se não existir
+        if (!document.querySelector('.menu-overlay')) {
+            const overlay = document.createElement('div');
+            overlay.className = 'menu-overlay';
+            document.body.appendChild(overlay);
+            overlay.addEventListener('click', () => hamburger.click());
+        }
+    } else {
+        document.body.style.overflow = 'auto';
+        const overlay = document.querySelector('.menu-overlay');
+        if (overlay) overlay.remove();
+    }
 });
 
 // Fechar menu ao clicar em um link
@@ -17,6 +33,9 @@ navLinks.forEach(link => {
     link.addEventListener('click', () => {
         hamburger.classList.remove('active');
         navMenu.classList.remove('active');
+        document.body.style.overflow = 'auto';
+        const overlay = document.querySelector('.menu-overlay');
+        if (overlay) overlay.remove();
     });
 });
 
@@ -45,8 +64,8 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 // ============================================
 
 const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
+    threshold: 0.05, // Mais sensível para mobile
+    rootMargin: '0px 0px -20px 0px'
 };
 
 const observer = new IntersectionObserver((entries) => {

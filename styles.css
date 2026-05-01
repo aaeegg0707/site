@@ -2417,6 +2417,25 @@ footer.footer {
         transform: rotate(-45deg) translateY(-12px);
     }
 
+    /* Efeito de desfoque no fundo quando o menu abre */
+    .menu-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: rgba(0, 0, 0, 0.5); /* Escurece levemente o fundo */
+        backdrop-filter: blur(8px);    /* Aplica o desfoque */
+        -webkit-backdrop-filter: blur(8px); /* Suporte para Safari/iOS */
+        z-index: 998; /* Fica logo abaixo da navbar (1000) */
+        animation: fadeInOverlay 0.3s ease forwards;
+    }
+
+    @keyframes fadeInOverlay {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+
     .facts-grid {
         grid-template-columns: 1fr;
     }
@@ -2551,22 +2570,6 @@ img {
     opacity: 1;
 }
 
-.leader-card h4 {
-    margin-top: 0;
-    margin-bottom: 10px;
-    color: var(--color-secondary);
-    font-size: 1.4rem;
-}
-
-.leader-role {
-    font-size: 0.9rem;
-    color: var(--color-primary);
-    font-weight: 600;
-    margin-bottom: 15px;
-}
-
-.leader-info {
-    text-align: left;
 }
 
 .leader-info p {
@@ -2580,6 +2583,226 @@ img {
    ============================================ */
 
 .ideology-box {
+    /* ... existing styles ... */
+}
+
+/* ============================================
+   LEADER CAROUSEL DOTS
+   ============================================ */
+.leader-carousel-dots-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+    gap: 10px;
+    padding: 10px 0; /* Add some padding for touch targets */
+}
+
+.leader-dot {
+    width: 12px;
+    height: 12px;
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.leader-dot:hover {
+    background-color: rgba(0, 0, 0, 0.5);
+    transform: scale(1.1);
+}
+
+.leader-dot.active {
+    background-color: var(--color-primary);
+    border-color: var(--color-primary);
+    transform: scale(1.2);
+    box-shadow: 0 0 0 3px rgba(var(--color-primary-rgb), 0.3);
+}
+
+/* Ensure dots are only visible on mobile */
+@media (min-width: 768px) {
+    .leader-carousel-dots-container {
+        display: none;
+    }
+}
+
+/* Adicione esta variável RGB se ainda não estiver definida */
+:root {
+    --color-primary: #ed1c24; /* Vermelho oficial RPDC */
+    --color-secondary: #024fa2; /* Azul oficial RPDC */
+    --color-gold: #d4af37; /* Dourado para honrarias */
+    --color-dark: #0a0f1d;
+    --color-accent: #1e3a8a;
+    --color-light: #f8f9fa;
+    --color-white: #ffffff;
+    --color-text: #333333;
+    --glass: rgba(255, 255, 255, 0.85);
+    --glass-border: rgba(255, 255, 255, 0.3);
+    --shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    --shadow-sm: 0 4px 15px rgba(0, 0, 0, 0.1);
+    --transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    --color-primary-rgb: 237, 28, 36; /* RGB para --color-primary */
+}
+
+/* ============================================
+   FAMILY TREE
+   ============================================ */
+
+.family-tree {
+    /* ... existing styles ... */
+}
+
+.tree-level {
+    /* ... existing styles ... */
+}
+
+.tree-member {
+    /* ... existing styles ... */
+}
+
+.tree-name {
+    /* ... existing styles ... */
+}
+
+.tree-dates {
+    /* ... existing styles ... */
+}
+
+.tree-line {
+    /* ... existing styles ... */
+}
+
+/* ============================================
+   HONORS GRID
+   ============================================ */
+
+.honors-grid {
+    /* ... existing styles ... */
+}
+
+.honor-item {
+    /* ... existing styles ... */
+}
+
+.honor-item:hover {
+    /* ... existing styles ... */
+}
+
+.honor-item i {
+    /* ... existing styles ... */
+}
+
+.honor-item strong {
+    /* ... existing styles ... */
+}
+
+.honor-item p {
+    /* ... existing styles ... */
+}
+
+/* ============================================
+   CARD SVG
+   ============================================ */
+
+.card-svg {
+    /* ... existing styles ... */
+}
+
+.gallery-svg {
+    /* ... existing styles ... */
+}
+
+/* ============================================
+   LANGUAGE SELECTOR
+   ============================================ */
+.lang-selector {
+    /* ... existing styles ... */
+}
+
+.lang-selector select {
+    /* ... existing styles ... */
+}
+
+.lang-selector select option {
+    /* ... existing styles ... */
+}
+
+/* ============================================
+   ESTILOS DA SEÇÃO DE TURISMO
+   ============================================ */
+.travel-banner {
+    /* ... existing styles ... */
+}
+
+.travel-full-img {
+    /* ... existing styles ... */
+}
+
+.travel-caption {
+    /* ... existing styles ... */
+}
+
+@media (max-width: 768px) {
+    .travel-full-img {
+        /* ... existing styles ... */
+    }
+    .travel-caption h3 {
+        /* ... existing styles ... */
+    }
+}
+
+/* ============================================
+   ANIMAÇÃO DO SÍMBOLO DO PTC
+   ============================================ */
+@keyframes ptc-glow {
+    /* ... existing styles ... */
+}
+
+.ptc-symbol-container svg,
+.ptc-symbol-container img {
+    /* ... existing styles ... */
+}
+
+.ptc-card:hover .ptc-symbol-container svg,
+.ptc-card:hover .ptc-symbol-container img {
+    /* ... existing styles ... */
+}
+
+/* Animação de entrada */
+.reveal {
+    /* ... existing styles ... */
+}
+
+.reveal.active {
+    /* ... existing styles ... */
+}
+
+/* ============================================
+   MODAL DE GALERIA (LIGHTBOX)
+   ============================================ */
+.modal {
+    /* ... existing styles ... */
+}
+
+.modal-content {
+    /* ... existing styles ... */
+}
+
+#caption {
+    /* ... existing styles ... */
+}
+
+@keyframes zoomIn {
+    /* ... existing styles ... */
+}
+
+.close-modal {
+    /* ... existing styles ... */
+}
+
+.close-modal:hover {
+    /* ... existing styles ... */
+}
     background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
     padding: 20px;
     border-radius: 8px;
