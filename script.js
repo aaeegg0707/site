@@ -54,13 +54,18 @@ const observer = new IntersectionObserver((entries) => {
         if (entry.isIntersecting) {
             entry.target.style.animation = 'fadeInUp 0.6s ease forwards';
             observer.unobserve(entry.target);
+            entry.target.classList.add('active');
+            if (entry.target.querySelector('.counter')) {
+                animateCounters(entry.target);
+            }
         }
     });
 }, observerOptions);
 
 // Observar todos os cards e seções
 // Removi a configuração de opacidade zero via JS para garantir que o conteúdo apareça sempre
-document.querySelectorAll('.card, .info-card, .region-card, .festival-card, .tradition-card, .gallery-item').forEach(element => {
+document.querySelectorAll('.card, .info-card, .region-card, .festival-card, .tradition-card, .gallery-item, .section-header, .leader-card').forEach(element => {
+    element.classList.add('reveal');
     observer.observe(element);
 });
 
@@ -85,19 +90,71 @@ window.addEventListener('scroll', () => {
 });
 
 // ============================================
-// GALERIA - EFEITO DE ZOOM AO HOVER
+// ANIMAÇÃO DE CONTADORES
 // ============================================
 
-const galleryItems = document.querySelectorAll('.gallery-item');
+function animateCounters(parent) {
+    const counters = parent.querySelectorAll('.counter');
+    counters.forEach(counter => {
+        const target = +counter.getAttribute('data-target');
+        const count = +counter.innerText;
+        const speed = target / 50;
 
-galleryItems.forEach(item => {
-    item.addEventListener('mouseenter', () => {
-        item.style.transform = 'scale(1.02)';
+        const updateCount = () => {
+            const current = +counter.innerText;
+            if (current < target) {
+                counter.innerText = Math.ceil(current + speed);
+                setTimeout(updateCount, 20);
+            } else {
+                counter.innerText = target.toLocaleString();
+            }
+        };
+        if (count === 0) updateCount();
     });
-    
-    item.addEventListener('mouseleave', () => {
-        item.style.transform = 'scale(1)';
+}
+
+// ============================================
+// MODAL DE GALERIA (ZOOM)
+// ============================================
+
+const modal = document.getElementById('gallery-modal');
+const modalImg = document.getElementById('modal-img');
+const captionText = document.getElementById('caption');
+const closeModal = document.querySelector('.close-modal');
+
+document.querySelectorAll('.gallery-item, .card-image').forEach(item => {
+    item.addEventListener('click', () => {
+        const img = item.querySelector('img');
+        const overlayText = item.querySelector('.gallery-overlay p, .card-overlay p');
+        
+        if (img && modal) {
+            modal.style.display = 'block';
+            modalImg.src = img.src;
+            captionText.innerHTML = overlayText ? overlayText.innerHTML : (img.alt || "Visualização");
+            document.body.style.overflow = 'hidden'; // Trava o scroll do site
+        }
     });
+});
+
+if (closeModal) {
+    closeModal.addEventListener('click', () => {
+        modal.style.display = 'none';
+        document.body.style.overflow = 'auto'; // Destrava o scroll
+    });
+}
+
+window.addEventListener('click', (e) => {
+    if (e.target === modal) {
+        modal.style.display = 'none';
+        document.body.style.overflow = 'auto';
+    }
+});
+
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modal && modal.style.display === 'block') {
+        modal.style.display = 'none';
+        document.body.style.overflow = 'auto';
+    }
 });
 
 // ============================================

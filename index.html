@@ -9,6 +9,9 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <!-- Barra de progresso de leitura -->
+    <div class="scroll-progress"></div>
+
     <!-- Navigation Bar Moderna -->
     <nav class="navbar">
         <div class="container nav-container">
@@ -120,14 +123,14 @@
                                 <div class="fact-icon">👥</div>
                                 <div class="fact-content">
                                     <strong>População</strong>
-                                    <p>~25 milhões</p>
+                                    <p>~<span class="counter" data-target="25">0</span> milhões</p>
                                 </div>
                             </div>
                             <div class="fact-item">
                                 <div class="fact-icon">📏</div>
                                 <div class="fact-content">
                                     <strong>Área</strong>
-                                    <p>120.540 km²</p>
+                                    <p><span class="counter" data-target="120540">0</span> km²</p>
                                 </div>
                             </div>
                             <div class="fact-item">
@@ -299,30 +302,14 @@
                         </div>
                     </div>
 
-                    <div class="card">
-                        <svg viewBox="0 0 600 400" class="card-svg">
-                            <!-- Fundo -->
-                            <defs>
-                                <linearGradient id="skyGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-                                    <stop offset="0%" style="stop-color:#87CEEB;stop-opacity:1" />
-                                    <stop offset="100%" style="stop-color:#E0F6FF;stop-opacity:1" />
-                                </linearGradient>
-                            </defs>
-                            <!-- Céu com gradiente -->
-                            <rect width="600" height="300" fill="url(#skyGradient)"/>
-                            <!-- Montanhas em camadas -->
-                            <polygon points="0,300 100,150 250,200 400,100 600,250 600,400 0,400" fill="#8B7355" opacity="0.8"/>
-                            <polygon points="0,300 120,180 350,220 500,120 600,300 600,400 0,400" fill="#A0826D" opacity="0.9"/>
-                            <!-- Neve nas montanhas -->
-                            <polygon points="100,150 120,180 80,200" fill="white"/>
-                            <polygon points="250,200 280,210 220,230" fill="white"/>
-                            <polygon points="400,100 430,120 370,150" fill="white"/>
-                            <!-- Sol -->
-                            <circle cx="500" cy="60" r="45" fill="#FFD700" opacity="0.9"/>
-                            <!-- Nuvens -->
-                            <ellipse cx="100" cy="80" rx="50" ry="30" fill="white" opacity="0.7"/>
-                            <ellipse cx="150" cy="90" rx="40" ry="25" fill="white" opacity="0.6"/>
-                        </svg>
+                    <div class="card card-image">
+                        <img src="https://4.bp.blogspot.com/-9HUf04vbikI/WNI8gUZTFmI/AAAAAAAAAWc/t_sNrXBq1EI2WNthYZfle1dTpXe1LnfFwCLcB/s1600/Monte%2BPaektu%2B1.jpg" 
+                             alt="Monte Paektu - O ponto mais alto da Coreia" 
+                             class="card-img"
+                             loading="lazy">
+                        <div class="card-overlay">
+                            <p>Monte Paektu - O Ponto Mais Alto da RPDC</p>
+                        </div>
                     </div>
                 </div>
 
@@ -433,6 +420,36 @@
                             <div>
                                 <strong>Cinema:</strong> Produção cinematográfica controlada pelo Estado com mensagens políticas específicas
                             </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Estádio e Grandes Jogos -->
+                <div class="grid-2 mb-40">
+                    <div class="card">
+                        <h3>🏟️ O Maior Estádio do Mundo</h3>
+                        <p>A RPDC abriga o <strong>Estádio Primeiro de Maio Rungrado</strong>, localizado em Pyongyang. Com capacidade para cerca de 114.000 espectadores, é reconhecido como o maior estádio do mundo por capacidade de assentos.</p>
+                        
+                        <div class="cultural-point">
+                            <i class="fas fa-users"></i>
+                            <div>
+                                <strong>Grandes Jogos de Massa (Arirang):</strong> O estádio é o palco dos famosos Jogos de Massa, um espetáculo artístico e coreográfico épico que envolve mais de 100.000 participantes em uma sincronia absoluta.
+                            </div>
+                        </div>
+                        <div class="cultural-point">
+                            <i class="fas fa-images"></i>
+                            <div>
+                                <strong>Mosaicos Humanos Gigantes:</strong> Uma característica única onde milhares de estudantes formam imagens colossais e mutáveis usando painéis coloridos, criando um telão humano de proporções monumentais.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card card-image">
+                        <img src="https://www.blogueirinho.com/wp-content/uploads/2023/12/Estadio-Rungrado-Primeiro-de-Maio-O-Canto-das-Torcidas-Twitter.webp" 
+                             alt="Grandes Jogos de Massa no Estádio Rungrado" 
+                             class="card-img"
+                             loading="lazy">
+                        <div class="card-overlay">
+                            <p>Grandes Jogos de Massa Arirang - Estádio Rungrado</p>
                         </div>
                     </div>
                 </div>
@@ -659,20 +676,11 @@
                 <div class="card mt-40 ptc-card">
                     <div style="display: flex; align-items: center; gap: 30px; flex-wrap: wrap; justify-content: center;">
                         <div class="ptc-symbol-container" style="width: 180px; height: 180px; background: var(--color-primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: var(--shadow); flex-shrink: 0;">
-                            <!-- Símbolo do PTC: Martelo, Foice e Pincel em SVG -->
-                            <svg viewBox="0 0 100 100" width="140" height="140">
-                                <g fill="#ffd700">
-                                    <!-- Martelo (Trabalhadores) -->
-                                    <path d="M35,45 L42,38 L65,65 L58,72 Z" />
-                                    <path d="M25,50 L40,35 L50,45 L35,60 Z" />
-                                    <!-- Foice (Camponeses) -->
-                                    <path d="M65,45 L58,38 L35,65 L42,72 Z" />
-                                    <path d="M60,35 A20,20 0 1,1 40,55 L45,50 A15,15 0 1,0 60,40 Z" />
-                                    <!-- Pincel (Intelectuais) -->
-                                    <path d="M48,85 L52,85 L52,40 L48,40 Z" />
-                                    <path d="M45,40 L55,40 L50,15 Z" />
-                                </g>
-                            </svg>
+                            <!-- Símbolo do PTC: Martelo, Foice e Pincel -->
+                            <img src="https://pcdob.org.br/wp-content/uploads/2017/10/partido-do-trabalho-da-coreia.png" 
+                                 alt="Símbolo do Partido dos Trabalhadores da Coreia" 
+                                 style="width: 140px; height: 140px; object-fit: contain;"
+                                 loading="lazy">
                         </div>
                         <div style="flex: 1; min-width: 300px;">
                             <h3>🚩 O Glorioso Estandarte do PTC</h3>
@@ -686,38 +694,53 @@
 
                 <div class="grid-3">
                     <div class="leader-card">
-                        <div class="leader-icon">👨‍🎓</div>
+                        <div class="leader-icon card-image">
+                            <img src="https://shared.prolewiki.org/uploads/0/01/Kim_Il_Sung.jpeg" alt="Kim Il-sung">
+                            <div class="leader-hover-info">
+                                <p>"A independência é o que mantém viva uma nação."</p>
+                            </div>
+                        </div>
                         <h4>Kim Il-sung</h4>
-                        <p class="leader-role">Fundador (1912-1994)</p>
+                        <p class="leader-role">Fundador (1912 — 1994)</p>
                         <div class="leader-info">
-                            <p><strong>Período:</strong> 1948-1994 (46 anos)</p>
-                            <p><strong>Título:</strong> Fundador e Presidente Eterno</p>
-                            <p>Kim Il-sung foi o fundador da República Popular Democrática da Coreia. Sua liderança estabeleceu os fundamentos do Estado, a ideologia do Juche, e iniciou o processo de construção nacional. É reverenciado como pai da nação.</p>
-                            <p><strong>Legado:</strong> Consolidação do sistema político, desenvolvimento econômico inicial e estabelecimento da estrutura governamental.</p>
+                            <p><strong>Período:</strong> 1948 — 1994 (46 anos)</p>
+                            <p><strong>Título:</strong> Presidente Eterno</p>
+                            <p>Fundador da República Popular Democrática da Coreia. Sua liderança estabeleceu os fundamentos do Estado e a ideologia do Juche. É reverenciado como o pai da nação.</p>
+                            <p><strong>Legado:</strong> Consolidação do sistema político e estabelecimento da estrutura governamental soberana.</p>
                         </div>
                     </div>
 
                     <div class="leader-card">
-                        <div class="leader-icon">👨‍💼</div>
+                        <div class="leader-icon card-image">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Kim_Jong_il_Portrait-2.jpg/960px-Kim_Jong_il_Portrait-2.jpg" alt="Kim Jong-il">
+                            <div class="leader-hover-info">
+                                <p>"A força das massas é inesgotável quando unidas sob uma única ideia."</p>
+                            </div>
+                        </div>
                         <h4>Kim Jong-il</h4>
-                        <p class="leader-role">Sucessor (1941-2011)</p>
+                        <p class="leader-role">Sucessor (1941 — 2011)</p>
                         <div class="leader-info">
-                            <p><strong>Período:</strong> 1994-2011 (17 anos)</p>
+                            <p><strong>Período:</strong> 1994 — 2011 (17 anos)</p>
                             <p><strong>Título:</strong> Líder Supremo</p>
-                            <p>Filho de Kim Il-sung, assumiu a liderança após a morte de seu pai. Continuou a implementação da ideologia do Juche e manteve a estrutura política estabelecida. Enfatizou a "Política de Songun" (militarismo).</p>
-                            <p><strong>Foco:</strong> Manutenção da estabilidade política e desenvolvimento tecnológico, especialmente militar.</p>
+                            <p>Assumiu a liderança em 1994. Implementou a "Política de Songun" (prioridade militar) para garantir a defesa nacional e a estabilidade do sistema.</p>
+                            <p><strong>Foco:</strong> Fortalecimento da capacidade defensiva e desenvolvimento tecnológico nacional.</p>
                         </div>
                     </div>
 
                     <div class="leader-card">
-                        <div class="leader-icon">👨‍🔬</div>
+                        <div class="leader-icon card-image">
+                            <img src="https://i0.wp.com/upload.wikimedia.org/wikipedia/commons/6/6e/Kim_Jong-un_April_2019_(cropped).jpg" alt="Kim Jong-un">
+                            <div class="leader-hover-info">
+                                <p>"Vamos avançar com determinação rumo à vitória final!"</p>
+                            </div>
+                        </div>
                         <h4>Kim Jong-un</h4>
-                        <p class="leader-role">Líder Atual (Nascido ~1983-1984)</p>
+                        <p class="leader-role">Líder Atual (1984 — Presente)</p>
                         <div class="leader-info">
-                            <p><strong>Período:</strong> 2011-Presente</p>
-                            <p><strong>Título:</strong> Presidente do Conselho de Estado Supremo</p>
-                            <p>Neto de Kim Il-sung, terceira geração da liderança. Assumiu o poder após a morte de seu pai aos 27 anos. Introduziu reformas simbólicas e iniciativas de diplomacia.</p>
-                            <p><strong>Abordagem:</strong> Busca modernização econômica (Byungjin Policy) enquanto mantém soberania nacional.</p>
+                            <p><strong>Período:</strong> 2011 — Presente</p>
+                            <p><strong>Título:</strong> Presidente do Conselho de Estado</p>
+                            <p>Terceira geração da liderança. Introduziu a política de Byungjin, focada no desenvolvimento econômico simultâneo à defesa nacional.</p>
+                            <p><strong>Abordagem:</strong> Modernização econômica e diplomacia estratégica global.</p>
                         </div>
                     </div>
                 </div>
@@ -730,29 +753,28 @@
                         <div class="tree-level">
                             <div class="tree-member">
                                 <div class="tree-name">Kim Il-sung (Fundador)</div>
-                                <div class="tree-dates">1912-1994</div>
+                                <div class="tree-dates">1912 — 1994</div>
                             </div>
                         </div>
                         <div class="tree-line"></div>
                         <div class="tree-level">
                             <div class="tree-member">
                                 <div class="tree-name">Kim Jong-il (Filho)</div>
-                                <div class="tree-dates">1941-2011</div>
+                                <div class="tree-dates">1941 — 2011</div>
                             </div>
                         </div>
                         <div class="tree-line"></div>
                         <div class="tree-level">
                             <div class="tree-member">
                                 <div class="tree-name">Kim Jong-un (Neto)</div>
-                                <div class="tree-dates">~1983/1984-Presente</div>
+                                <div class="tree-dates">1984 — Presente</div>
                             </div>
                         </div>
                     </div>
 
                     <h4 style="margin-top: 30px;">Características da Sucessão Dinástica:</h4>
                     <ul class="bullet-list">
-                        <li><strong>Continuidade Garantida:</strong> Sistema assegura transferência pacífica de poder dentro da família</li>
-                        <li><strong>Legitimidade Hereditária:</strong> Autoridade transmitida através da linhagem sanguínea</li>
+                        <li><strong>Continuidade Garantida:</strong> Sistridade transmitida através da linhagem sanguínea</li>
                         <li><strong>Culto à Personalidade:</strong> Cada líder é reverenciado e considerado indispensável</li>
                         <li><strong>Preparação Sucessória:</strong> Novos líderes recebem treinamento específico para o cargo</li>
                         <li><strong>Estabilidade Institucional:</strong> Sistema reduz conflitos de poder entre facções diferentes</li>
@@ -908,14 +930,6 @@
                 <div class="section-header">
                     <h2>ℹ️ Informações Práticas</h2>
                     <div class="header-underline"></div>
-                </div>
-
-                <!-- Aviso Importante -->
-                <div class="alert alert-warning">
-                    <i class="fas fa-exclamation-triangle"></i>
-                    <div>
-                        <strong>⚠️ Nota Importante:</strong> O acesso à Coreia do Norte é extremamente limitado, altamente restritivo e controlado. A maioria dos países desaconselha viagens de cidadãos para lá. As informações de contato direto são praticamente inacessíveis para cidadãos estrangeiros.
-                    </div>
                 </div>
 
                 <div class="grid-2 mt-40">
@@ -1136,6 +1150,13 @@
             </div>
         </div>
     </footer>
+
+    <!-- Modal para Galeria (Zoom) -->
+    <div id="gallery-modal" class="modal">
+        <span class="close-modal">&times;</span>
+        <img class="modal-content" id="modal-img">
+        <div id="caption"></div>
+    </div>
 
     <!-- Script para Menu Mobile -->
     <script src="script.js"></script>

@@ -16,6 +16,8 @@
     --color-light: #f8f9fa;
     --color-white: #ffffff;
     --color-text: #333333;
+    --glass: rgba(255, 255, 255, 0.85);
+    --glass-border: rgba(255, 255, 255, 0.3);
     --shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
     --shadow-sm: 0 4px 15px rgba(0, 0, 0, 0.1);
     --transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
@@ -35,6 +37,18 @@ body {
     background-image: radial-gradient(#e5e7eb 0.5px, transparent 0.5px);
     background-size: 20px 20px;
     overflow-x: hidden;
+}
+
+/* Barra de progresso */
+.scroll-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--color-primary), var(--color-gold));
+    z-index: 2000;
+    width: 0%;
+    transition: width 0.1s ease;
 }
 
 .container {
@@ -206,7 +220,8 @@ header.hero {
    ============================================ */
 
 nav.navbar {
-    background: #0f172a; /* Azul marinho muito escuro */
+    background: rgba(15, 23, 42, 0.9); /* Translucidez */
+    backdrop-filter: blur(12px);
     padding: 0;
     position: sticky;
     top: 0;
@@ -398,10 +413,11 @@ main {
    ============================================ */
 
 .card {
-    background: var(--color-white);
+    background: var(--glass);
+    backdrop-filter: blur(8px);
     padding: 30px;
     border-radius: 12px;
-    box-shadow: var(--shadow-sm);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
     transition: var(--transition);
     border: 1px solid #ddd;
     border-left: 8px solid var(--color-primary);
@@ -2491,8 +2507,48 @@ img {
 }
 
 .leader-icon {
-    font-size: 3rem;
-    margin-bottom: 15px;
+    width: 150px;
+    height: 150px;
+    margin: 0 auto 15px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 4px solid var(--color-primary) !important;
+    box-shadow: var(--shadow-sm);
+    position: relative;
+    cursor: pointer;
+}
+
+.leader-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: var(--transition);
+}
+
+.leader-hover-info {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(198, 12, 48, 0.9); /* Vermelho translúcido oficial */
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 15px;
+    text-align: center;
+    opacity: 0;
+    transition: var(--transition);
+    pointer-events: none;
+    font-size: 0.85rem;
+    font-weight: 600;
+    font-style: italic;
+}
+
+.leader-icon:hover .leader-hover-info {
+    opacity: 1;
 }
 
 .leader-card h4 {
@@ -2727,12 +2783,87 @@ img {
     }
 }
 
-.ptc-symbol-container svg {
+.ptc-symbol-container svg,
+.ptc-symbol-container img {
     transition: var(--transition);
     will-change: filter, transform;
 }
 
-.ptc-card:hover .ptc-symbol-container svg {
+.ptc-card:hover .ptc-symbol-container svg,
+.ptc-card:hover .ptc-symbol-container img {
     transform: scale(1.1);
     animation: ptc-glow 1.5s infinite alternate ease-in-out;
+}
+
+/* Animação de entrada */
+.reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s ease-out;
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ============================================
+   MODAL DE GALERIA (LIGHTBOX)
+   ============================================ */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 3000;
+    padding-top: 60px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background-color: rgba(0, 0, 0, 0.9);
+    backdrop-filter: blur(8px);
+}
+
+.modal-content {
+    margin: auto;
+    display: block;
+    max-width: 90%;
+    max-height: 80vh;
+    border-radius: 8px;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+    animation: zoomIn 0.3s ease-out;
+}
+
+#caption {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 700px;
+    text-align: center;
+    color: var(--color-white);
+    padding: 20px 0;
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+@keyframes zoomIn {
+    from { transform: scale(0.8); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+.close-modal {
+    position: absolute;
+    top: 20px;
+    right: 35px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: var(--transition);
+    z-index: 3001;
+}
+
+.close-modal:hover {
+    color: var(--color-primary);
+    transform: scale(1.2);
 }
