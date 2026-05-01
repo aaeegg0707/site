@@ -2670,3 +2670,69 @@ img {
     background: #024fa2;
     color: white;
 }
+
+/* ============================================
+   ESTILOS DA SEÇÃO DE TURISMO
+   ============================================ */
+.travel-banner {
+    position: relative;
+    width: 100%;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    margin-bottom: 30px;
+}
+
+.travel-full-img {
+    width: 100%;
+    height: 500px;
+    object-fit: cover;
+    display: block;
+    transition: var(--transition);
+}
+
+.travel-caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(transparent, rgba(0,0,0,0.8));
+    color: white;
+    padding: 40px 30px 20px;
+}
+
+.travel-caption h3 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+@media (max-width: 768px) {
+    .travel-full-img {
+        height: 300px;
+    }
+    .travel-caption h3 {
+        font-size: 1.5rem;
+    }
+}
+
+/* ============================================
+   ANIMAÇÃO DO SÍMBOLO DO PTC
+   ============================================ */
+@keyframes ptc-glow {
+    from {
+        filter: drop-shadow(0 0 5px #ffd700);
+    }
+    to {
+        filter: drop-shadow(0 0 15px #ffd700) drop-shadow(0 0 25px rgba(255, 215, 0, 0.6));
+    }
+}
+
+.ptc-symbol-container svg {
+    transition: var(--transition);
+    will-change: filter, transform;
+}
+
+.ptc-card:hover .ptc-symbol-container svg {
+    transform: scale(1.1);
+    animation: ptc-glow 1.5s infinite alternate ease-in-out;
+}
