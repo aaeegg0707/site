@@ -65,18 +65,24 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 
 const observerOptions = {
     threshold: 0.05, // Mais sensível para mobile
-    rootMargin: '0px 0px -20px 0px'
+    rootMargin: '0px 0px -50px 0px'
 };
 
 const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
+    entries.forEach((entry, index) => {
         if (entry.isIntersecting) {
-            entry.target.style.animation = 'fadeInUp 0.6s ease forwards';
+            // Pequeno delay baseado na posição para efeito cascata
+            const delay = (index % 3) * 100; 
+            setTimeout(() => {
+                entry.target.classList.add('active');
+                entry.target.style.animation = 'fadeInUp 0.6s ease forwards';
+                
+                if (entry.target.querySelector('.counter')) {
+                    animateCounters(entry.target);
+                }
+            }, delay);
+            
             observer.unobserve(entry.target);
-            entry.target.classList.add('active');
-            if (entry.target.querySelector('.counter')) {
-                animateCounters(entry.target);
-            }
         }
     });
 }, observerOptions);
@@ -94,15 +100,21 @@ document.querySelectorAll('.card, .info-card, .region-card, .festival-card, .tra
 
 let lastScrollTop = 0;
 const navbar = document.querySelector('nav.navbar');
+const scrollProgress = document.querySelector('.scroll-progress');
 
 window.addEventListener('scroll', () => {
     let scrollTop = window.scrollY || document.documentElement.scrollTop;
     
+    // Barra de progresso de leitura
+    const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    const scrolled = (scrollTop / height) * 100;
+    if (scrollProgress) scrollProgress.style.width = scrolled + "%";
+
     // Adicionar sombra quando scrollar
     if (scrollTop > 0) {
-        navbar.style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.15)';
+        navbar.classList.add('scrolled');
     } else {
-        navbar.style.boxShadow = '0 2px 4px rgba(0, 0, 0, 0.1)';
+        navbar.classList.remove('scrolled');
     }
     
     lastScrollTop = scrollTop;
@@ -354,17 +366,24 @@ console.log(`
 // MODO ESCURO (Opcional - Descomentár para ativar)
 // ============================================
 
-/*
 function toggleDarkMode() {
     document.body.classList.toggle('dark-mode');
-    localStorage.setItem('darkMode', document.body.classList.contains('dark-mode'));
+    const isDark = document.body.classList.contains('dark-mode');
+    localStorage.setItem('darkMode', isDark);
+    
+    const icon = document.querySelector('#dark-mode-toggle i');
+    if (icon) {
+        icon.className = isDark ? 'fas fa-sun' : 'fas fa-moon';
+    }
 }
 
-// Verificar preferência salva
-if (localStorage.getItem('darkMode') === 'true') {
-    document.body.classList.add('dark-mode');
+const darkToggle = document.getElementById('dark-mode-toggle');
+if (darkToggle) {
+    darkToggle.addEventListener('click', toggleDarkMode);
+    if (localStorage.getItem('darkMode') === 'true') {
+        toggleDarkMode();
+    }
 }
-*/
 
 // ============================================
 // PRELOAD DE RECURSOS
@@ -387,189 +406,6 @@ function preloadImages() {
 }
 
 preloadImages();
-
-// ============================================
-// SISTEMA DE TRADUÇÃO (i18n)
-// ============================================
-
-const translations = {
-    pt: {
-        nav_overview: "Visão Geral",
-        nav_history: "História",
-        nav_geography: "Geografia",
-        nav_culture: "Cultura",
-        nav_leadership: "Liderança",
-        nav_gallery: "Galeria",
-        nav_info: "Info",
-        hero_title: "COREIA DO NORTE",
-        hero_subtitle: "Uma Jornada pela História, Cultura e Tradições",
-        btn_explore: "Explorar",
-        btn_gallery: "Galeria",
-        header_overview: "📊 Visão Geral",
-        facts_title: "Fatos Essenciais",
-        history_title: "📜 História",
-        history_intro: "A Coreia do Norte tem uma história rica e complexa que moldou a nação moderna.",
-        hist_period_1_title: "Período Colonial Japonês",
-        hist_period_1_desc: "A Península Coreana foi colonizada pelo Japão, resultando em profundas mudanças.",
-        geography_title: "🗺️ Geografia",
-        geo_loc_title: "Localização e Características",
-        geo_pos_label: "Posição Estratégica:",
-        footer_about_title: "Sobre Este Guia",
-        footer_about_desc: "Um guia educacional completo sobre a Coreia do Norte."
-    },
-    en: {
-        nav_overview: "Overview",
-        nav_history: "History",
-        nav_geography: "Geography",
-        nav_culture: "Culture",
-        nav_leadership: "Leadership",
-        nav_gallery: "Gallery",
-        nav_info: "Info",
-        hero_title: "NORTH KOREA",
-        hero_subtitle: "A Journey Through History, Culture, and Traditions",
-        btn_explore: "Explore",
-        btn_gallery: "Gallery",
-        header_overview: "📊 Overview",
-        facts_title: "Essential Facts",
-        history_title: "📜 History",
-        history_intro: "North Korea has a rich and complex history that shaped the modern nation.",
-        hist_period_1_title: "Japanese Colonial Period",
-        hist_period_1_desc: "The Korean Peninsula was colonized by Japan, resulting in profound changes.",
-        geography_title: "🗺️ Geography",
-        geo_loc_title: "Location and Characteristics",
-        geo_pos_label: "Strategic Position:",
-        footer_about_title: "About This Guide",
-        footer_about_desc: "A complete educational guide about North Korea."
-    },
-    es: {
-        nav_overview: "Visión General",
-        nav_history: "Historia",
-        nav_geography: "Geografía",
-        nav_culture: "Cultura",
-        nav_leadership: "Liderazgo",
-        nav_gallery: "Galería",
-        nav_info: "Info",
-        hero_title: "COREA DEL NORTE",
-        hero_subtitle: "Un viaje por la historia, la cultura y las tradiciones",
-        btn_explore: "Explorar",
-        btn_gallery: "Galería",
-        header_overview: "📊 Visión General"
-    },
-    fr: {
-        nav_overview: "Aperçu",
-        nav_history: "Histoire",
-        nav_geography: "Géographie",
-        nav_culture: "Culture",
-        nav_leadership: "Direction",
-        nav_gallery: "Galerie",
-        nav_info: "Info",
-        hero_title: "CORÉE DU NORD",
-        hero_subtitle: "Un voyage à travers l'histoire, la culture et les traditions",
-        btn_explore: "Explorer",
-        btn_gallery: "Galerie",
-        header_overview: "📊 Aperçu"
-    },
-    "pt-pt": {
-        nav_overview: "Visão Geral",
-        nav_history: "História",
-        nav_geography: "Geografia",
-        nav_culture: "Cultura",
-        nav_leadership: "Liderança",
-        nav_gallery: "Galeria",
-        nav_info: "Info",
-        hero_title: "COREIA DO NORTE",
-        hero_subtitle: "Uma Jornada pela História, Cultura e Tradições",
-        btn_explore: "Explorar",
-        btn_gallery: "Galeria",
-        header_overview: "📊 Visão Geral"
-    },
-    ko: {
-        nav_overview: "개요",
-        nav_history: "역사",
-        nav_geography: "지리",
-        nav_culture: "문화",
-        nav_leadership: "지도부",
-        nav_gallery: "갤러리",
-        nav_info: "정보",
-        hero_title: "조선민주주의인민공화국",
-        hero_subtitle: "역사, 문화, 전통을 통해 보는 여정",
-        btn_explore: "탐험하기",
-        btn_gallery: "갤러리",
-        header_overview: "📊 개요"
-    },
-    ja: {
-        nav_overview: "概要",
-        nav_history: "歴史",
-        nav_geography: "地理",
-        nav_culture: "文化",
-        nav_leadership: "指導部",
-        nav_gallery: "ギャラリー",
-        nav_info: "情報",
-        hero_title: "北朝鮮",
-        hero_subtitle: "歴史、文化、伝統を巡る旅",
-        btn_explore: "探索する",
-        btn_gallery: "ギャラリー",
-        header_overview: "📊 概要"
-    },
-    zh: {
-        nav_overview: "概览",
-        nav_history: "历史",
-        nav_geography: "地理",
-        nav_culture: "文化",
-        nav_leadership: "领导层",
-        nav_gallery: "画廊",
-        nav_info: "信息",
-        hero_title: "朝鲜",
-        hero_subtitle: "穿越历史、文化和传统的旅程",
-        btn_explore: "探索",
-        btn_gallery: "画廊",
-        header_overview: "📊 概览"
-    },
-    ru: {
-        nav_overview: "Обзор",
-        nav_history: "История",
-        nav_geography: "География",
-        nav_culture: "Культура",
-        nav_leadership: "Руководство",
-        nav_gallery: "Галерея",
-        nav_info: "Инфо",
-        hero_title: "СЕВЕРНАЯ КОРЕЯ",
-        hero_subtitle: "Путешествие через историю, культуру и традиции",
-        btn_explore: "Исследовать",
-        btn_gallery: "Галерея",
-        header_overview: "📊 Обзор"
-    }
-};
-
-function updateLanguage(lang) {
-    document.querySelectorAll('[data-i18n]').forEach(el => {
-        const key = el.getAttribute('data-i18n');
-        const translation = translations[lang][key];
-        
-        if (translation) {
-            const icon = el.querySelector('i');
-            if (icon) {
-                // Preserva o ícone e atualiza o texto
-                el.innerHTML = `${icon.outerHTML} ${translation}`;
-            } else {
-                el.textContent = translation;
-            }
-        }
-    });
-    localStorage.setItem('preferredLang', lang);
-}
-
-const langSelect = document.getElementById('language-select');
-if (langSelect) {
-    // Carregar preferência salva
-    const savedLang = localStorage.getItem('preferredLang') || 'pt';
-    langSelect.value = savedLang;
-    updateLanguage(savedLang);
-
-    langSelect.addEventListener('change', (e) => {
-        updateLanguage(e.target.value);
-    });
-}
 
 // ============================================
 // EVENT LISTENERS PARA ELEMENTOS INTERATIVOS

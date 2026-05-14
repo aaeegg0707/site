@@ -23,6 +23,16 @@
     --transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
+/* Variáveis para o Modo Escuro */
+body.dark-mode {
+    --color-light: #0f172a;
+    --color-white: #1e293b;
+    --color-text: #f1f5f9;
+    --glass: rgba(30, 41, 59, 0.95);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    background-image: radial-gradient(rgba(255, 255, 255, 0.05) 0.5px, transparent 0.5px);
+}
+
 html {
     scroll-behavior: smooth;
     font-size: 16px;
@@ -49,6 +59,7 @@ body {
     z-index: 2000;
     width: 0%;
     transition: width 0.1s ease;
+    box-shadow: 0 0 10px rgba(237, 28, 36, 0.6);
 }
 
 .container {
@@ -421,6 +432,40 @@ main {
     transition: var(--transition);
     border: 1px solid #ddd;
     border-left: 8px solid var(--color-primary);
+}
+
+/* Overrides específicos para o Modo Escuro */
+body.dark-mode .section.bg-light {
+    background-color: #020617;
+}
+
+body.dark-mode .card, 
+body.dark-mode .info-card, 
+body.dark-mode .region-card, 
+body.dark-mode .festival-card,
+body.dark-mode .tradition-card,
+body.dark-mode .leader-card,
+body.dark-mode .economy-card,
+body.dark-mode .resource-box {
+    background: var(--glass);
+    border-color: var(--glass-border);
+    color: var(--color-text);
+}
+
+body.dark-mode p, 
+body.dark-mode .card p,
+body.dark-mode .fact-content p,
+body.dark-mode .timeline-intro,
+body.dark-mode .footer-section p {
+    color: #94a3b8;
+}
+
+body.dark-mode .fact-item,
+body.dark-mode .info-box,
+body.dark-mode .cultural-point,
+body.dark-mode .cuisine-item {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.1);
 }
 
 .card:hover {
@@ -2923,32 +2968,6 @@ img {
     height: 100%;
 }
 
-/* ============================================
-   LANGUAGE SELECTOR
-   ============================================ */
-.lang-selector {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin-left: 20px;
-    color: white;
-}
-
-.lang-selector select {
-    background: rgba(255, 255, 255, 0.1);
-    color: white;
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    border-radius: 4px;
-    padding: 2px 5px;
-    cursor: pointer;
-    font-weight: 600;
-    outline: none;
-}
-
-.lang-selector select option {
-    background: #024fa2;
-    color: white;
-}
 
 /* ============================================
    ESTILOS DA SEÇÃO DE TURISMO
