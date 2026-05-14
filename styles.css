@@ -47,6 +47,7 @@ body {
     background-image: radial-gradient(#e5e7eb 0.5px, transparent 0.5px);
     background-size: 20px 20px;
     overflow-x: hidden;
+    transition: var(--transition);
 }
 
 /* Barra de progresso */
@@ -240,6 +241,7 @@ nav.navbar {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
     border-bottom: 3px solid var(--color-primary);
     height: 60px;
+    transition: var(--transition);
     display: flex;
     align-items: center;
 }
@@ -437,6 +439,16 @@ main {
 /* Overrides específicos para o Modo Escuro */
 body.dark-mode .section.bg-light {
     background-color: #020617;
+}
+
+/* Ajuste para visibilidade do menu no Modo Escuro */
+body.dark-mode .nav-link,
+body.dark-mode .nav-text {
+    color: var(--color-text);
+}
+
+body.dark-mode .hamburger span {
+    background-color: var(--color-text);
 }
 
 body.dark-mode .card, 
@@ -3108,4 +3120,43 @@ img {
 .close-modal:hover {
     color: var(--color-primary);
     transform: scale(1.2);
+}
+
+/* Botões de navegação do Modal (Anterior e Próximo) */
+.prev-modal, .next-modal {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    width: auto;
+    padding: 20px;
+    margin-top: -50px;
+    color: white;
+    font-weight: bold;
+    font-size: 40px;
+    transition: 0.6s ease;
+    user-select: none;
+    text-decoration: none;
+    z-index: 3001;
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 5px;
+}
+
+.next-modal {
+    right: 20px;
+}
+
+.prev-modal {
+    left: 20px;
+}
+
+.prev-modal:hover, .next-modal:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+    color: var(--color-primary);
+}
+
+@media (max-width: 768px) {
+    .prev-modal, .next-modal {
+        font-size: 30px;
+        padding: 10px;
+    }
 }

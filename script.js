@@ -152,19 +152,57 @@ const modal = document.getElementById('gallery-modal');
 const modalImg = document.getElementById('modal-img');
 const captionText = document.getElementById('caption');
 const closeModal = document.querySelector('.close-modal');
+const prevBtn = document.querySelector('.prev-modal');
+const nextBtn = document.querySelector('.next-modal');
 
-document.querySelectorAll('.gallery-item, .card-image').forEach(item => {
+let currentIndex = 0;
+const galleryItems = Array.from(document.querySelectorAll('.gallery-item, .card-image'));
+
+function updateModal(index) {
+    const item = galleryItems[index];
+    const img = item.querySelector('img');
+    const overlayText = item.querySelector('.gallery-overlay p, .card-overlay p');
+    const description = item.getAttribute('data-description');
+
+    if (img && modal) {
+        modalImg.src = img.src;
+        const title = overlayText ? overlayText.innerHTML : (img.alt || "Visualização");
+        // Mantém o estilo com título e descrição
+        captionText.innerHTML = `<h3 style="color: var(--color-primary); margin-bottom: 8px;">${title}</h3>${description ? `<p style="font-weight: normal; font-size: 1rem; line-height: 1.4; opacity: 0.9;">${description}</p>` : ''}`;
+    }
+}
+
+galleryItems.forEach((item, index) => {
     item.addEventListener('click', () => {
-        const img = item.querySelector('img');
-        const overlayText = item.querySelector('.gallery-overlay p, .card-overlay p');
-        
-        if (img && modal) {
-            modal.style.display = 'block';
-            modalImg.src = img.src;
-            captionText.innerHTML = overlayText ? overlayText.innerHTML : (img.alt || "Visualização");
-            document.body.style.overflow = 'hidden'; // Trava o scroll do site
-        }
+        currentIndex = index;
+        modal.style.display = 'block';
+        updateModal(currentIndex);
+        document.body.style.overflow = 'hidden';
     });
+});
+
+if (prevBtn) {
+    prevBtn.addEventListener('click', (e) => {
+        e.stopPropagation(); // Impede que o modal feche ao clicar no botão
+        currentIndex = (currentIndex - 1 + galleryItems.length) % galleryItems.length;
+        updateModal(currentIndex);
+    });
+}
+
+if (nextBtn) {
+    nextBtn.addEventListener('click', (e) => {
+        e.stopPropagation(); // Impede que o modal feche ao clicar no botão
+        currentIndex = (currentIndex + 1) % galleryItems.length;
+        updateModal(currentIndex);
+    });
+}
+
+// Navegação por teclado
+document.addEventListener('keydown', (e) => {
+    if (modal && modal.style.display === 'block') {
+        if (e.key === 'ArrowLeft') prevBtn.click();
+        if (e.key === 'ArrowRight') nextBtn.click();
+    }
 });
 
 if (closeModal) {
